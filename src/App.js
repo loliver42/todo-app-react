@@ -1,25 +1,98 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
+import React, { useState, useEffect } from "react";
+
+function Task({ task, index, completeTask, removeTask }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className="task"
+      style={{ textDecoration: task.completed ? "line-through" : "" }}
+    >
+      {task.title}
+
+      <button onClick={() => completeTask(index)}> Completed</button>
+      <button style={{ background: "red" }} onClick={() => removeTask(index)}>
+        X
+      </button>
     </div>
   );
 }
 
-export default App;
+export default function Todo() {
+  let [tasksRemaining, setTasksRemaining] = useState(0);
+
+  let [tasks, setTasks] = useState([
+    {
+      title: "Make Dinner",
+      completed: true,
+    },
+    {
+      title: "Workout",
+      completed: true,
+    },
+    {
+      title: "Do Dishes",
+      completed: false,
+    },
+  ]);
+  useEffect(() => {
+    setTasksRemaining(tasks.filter((task) => !task.completed).length);
+  }, [setTasksRemaining, tasks]);
+
+  let addTask = (title) => {
+    let newTasks = [...tasks, { title, completed: false }];
+    setTasks(newTasks);
+  };
+  let completeTask = (index) => {
+    let newTasks = [...tasks];
+    newTasks[index].completed = true;
+    setTasks(newTasks);
+  };
+  let removeTask = (index) => {
+    let newTasks = [...tasks];
+    newTasks.splice(index, 1);
+    setTasks(newTasks);
+  };
+  return (
+    <div className="todo-container">
+      <div className="header"> TODO - LIST</div>
+      <div className="pending">Pending Tasks ({tasksRemaining})</div>
+      <div className="tasks">
+        {tasks.map((task, index) => (
+          <Task
+            task={task}
+            index={index}
+            completeTask={completeTask}
+            removeTask={removeTask}
+            key={index}
+          />
+        ))}
+      </div>
+      <div className="create-task">
+        <CreateTask addTask={addTask} />
+      </div>
+    </div>
+  );
+}
+function CreateTask({ addTask }) {
+  let [value, setValue] = useState("");
+
+  let handleSubmit = (event) => {
+    event.preventDefault();
+    if (!value) return;
+
+    addTask(value);
+    setValue("");
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        className="input"
+        value={value}
+        placeholder="Add a new task"
+        onChange={(event) => setValue(event.target.value)}
+      />
+    </form>
+  );
+}
