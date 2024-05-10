@@ -56,8 +56,14 @@ a {
   color: #fecea8;
 }
 
-@media (max-width: 600px) {
-  .task {
+@media (max-width: 576px) {
+  .task,
+  .task button {
+    display: flex;
     flex-direction: column;
+  }
+  .create-task input[type="text"] {
+    width: 70%;
+    margin-left: 5px;
   }
 }
