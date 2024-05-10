@@ -8,6 +8,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />
+    <footer>
+      Coded by Lila Oliver outsourced on{" "}
+      <a href="https://github.com/loliver42/todo-app-react">GitHub</a>, hosted
+      on <a href="https://todo-react-app-24.netlify.app">Netlify</a>
+    </footer>
   </React.StrictMode>
 );
 
