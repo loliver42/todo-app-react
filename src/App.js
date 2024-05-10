@@ -71,6 +71,7 @@ export default function Todo() {
       <div className="create-task">
         <CreateTask addTask={addTask} />
       </div>
+      <div className="instructions">*Push enter after typing task*</div>
     </div>
   );
 }

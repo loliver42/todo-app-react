@@ -48,6 +48,14 @@ body {
   padding: 0.7em;
   background-color: #fecea8;
   border-radius: 4px;
+  margin-bottom: 0;
+}
+.instructions {
+  text-align: center;
+  margin-top: 0;
+  font-size: 14px;
+  opacity: 0.9;
+  color: #45171d;
 }
 footer {
   text-align: center;
