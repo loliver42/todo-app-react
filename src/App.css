@@ -55,3 +55,9 @@ footer {
 a {
   color: #fecea8;
 }
+
+@media (max-width: 600px) {
+  .task {
+    flex-direction: column;
+  }
+}
